@@ -8,7 +8,7 @@ CREATE TABLE searchListing (
     title VARCHAR(50) NOT NULL,
     host VARCHAR(50) NOT NULL,
     city VARCHAR(50) NOT NULL,
-    photoURL VARCHAR(200) NOT NULL
+    photoURL VARCHAR(70) NOT NULL
 );
 
 CREATE TABLE searchRecord (

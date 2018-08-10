@@ -15,22 +15,22 @@ let myClient;
 
 const imageEndpoint = 'https://s3.amazonaws.com/fec-overview-service-images';
 
-const insertData = () => {
-  const startDate = new Date().getSeconds();
-    pool.connect((err, client) => {
-      myClient = client;
-      for (let i = 0; i < 10000000; i++) {
-      const insertQuery = format(`INSERT INTO searchListing (title, host, city, photoURL) 
-      VALUES ('${faker.random.words()}', '${faker.name.findName()}${i}', '${faker.address.city()}', '${imageEndpoint}/home_${5}.jpg');`)
-        myClient.query(insertQuery, (err, result) => {
-          if (err) console.log(insertQuery, err);
-          console.log(i);
-          if (i === 9999999) console.log('difference', (new Date()).getMinutes() - startDate)
-        })
-      }
-    })
-}
-insertData();
+// const insertData = () => {
+//   const startDate = new Date().getSeconds();
+//     pool.connect((err, client) => {
+//       myClient = client;
+//       for (let i = 0; i < 10000000; i++) {
+//       const insertQuery = format(`INSERT INTO searchListing (title, host, city, photoURL) 
+//       VALUES ('${faker.random.words()}', '${faker.name.findName()}${i}', '${faker.address.city()}', '${imageEndpoint}/home_${5}.jpg');`)
+//         myClient.query(insertQuery, (err, result) => {
+//           if (err) console.log(insertQuery, err);
+//           console.log(i);
+//           if (i === 9999999) console.log('difference', (new Date()).getMinutes() - startDate)
+//         })
+//       }
+//     })
+// }
+// insertData();
 
 
 // const listingCount = 101;
