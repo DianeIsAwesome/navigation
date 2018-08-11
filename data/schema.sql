@@ -20,9 +20,9 @@ CREATE TABLE searchRecord (
 );
 
 
-COPY searchListing FROM './data/listingData0-10.csv' WITH (FORMAT csv);
+\COPY searchListing FROM 'data/listingData0-10.csv' WITH (FORMAT csv);
 
-COPY searchRecord FROM './data/recordsData0-10.csv' WITH (FORMAT csv);
+\COPY searchRecord FROM 'data/recordsData0-10.csv' WITH (FORMAT csv);
 
 
 -- psql < ./data/schema.sql

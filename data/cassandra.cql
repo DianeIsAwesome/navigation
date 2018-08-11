@@ -1,4 +1,4 @@
-drop database
+DROP KEYSPACE IF EXISTS listings;
 
 CREATE KEYSPACE listings WITH REPLICATION={'class':'SimpleStrategy', 'replication_factor':2};
 
