@@ -1,7 +1,9 @@
+drop database
+
 CREATE KEYSPACE listings WITH REPLICATION={'class':'SimpleStrategy', 'replication_factor':2};
 
 CREATE TABLE searchListing (
-    listingId varint, 
+    listingId VARINT, 
     title VARCHAR, 
     host VARCHAR, 
     city VARCHAR, 
@@ -10,7 +12,7 @@ CREATE TABLE searchListing (
 );
 
 CREATE TABLE searchRecord (
-    searchId varint, 
+    searchId VARINT, 
     title VARCHAR, 
     searchName VARCHAR, 
     recordText VARCHAR, 
@@ -24,4 +26,4 @@ COPY searchListing (listingId, title, host, city, photoURL) FROM 'data/listingsD
 
 COPY searchRecord (searchId, title, searchName, recordText, createdAt) FROM 'data/recordsData0-10.csv';
 
--- cqlsh < ./data/cassandra.sql
+-- cqlsh -f ./data/cassandra.cql

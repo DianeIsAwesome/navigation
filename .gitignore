@@ -31,5 +31,5 @@ dist/
 
 # ignore data
 listingsIdAndName*
-listingsData*
+listingData*
 recordsData*
