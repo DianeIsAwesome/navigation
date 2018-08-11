@@ -1,10 +1,44 @@
 const { createBackgroundTransaction, endTransaction } = require('newrelic');
+const cluster = require('cluster');
 require('dotenv').config()
 const express = require('express');
 const parser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 const model = require('./model');
+
+const numCPUs = require('os').cpus().length;
+
+if (cluster.isMaster) {
+  masterProcess();
+} else {
+  childProcess();  
+}
+
+function masterProcess() {
+  console.log(`Master ${process.pid} is running`);
+
+  for (let i = 0; i < numCPUs; i++) {
+    console.log(`Forking process number ${i}...`);
+    cluster.fork();
+  }
+  cluster.on('online', function(worker) {
+    console.log('Worker ' + worker.process.pid + ' is online');
+  });
+
+  cluster.on('exit', function(worker, code, signal) {
+      console.log('Worker ' + worker.process.pid + ' died with code: ' + code + ', and signal: ' + signal);
+      console.log('Starting a new worker');
+      cluster.fork();
+  });
+
+  // process.exit();
+}
+
+function childProcess() {
+  console.log(`Worker ${process.pid} started`);
+
+
 
 // createBackgroundTransaction('get search records', () => {
 //   axios.get('/api/searchRecords')
@@ -72,6 +106,9 @@ app.use('/listing:listingId', express.static(path.join(__dirname, '../public/'))
 //   res.sendFile(path.resolve(`${__dirname}/../public/index.html`));
 // });
 
-app.listen(port, () => console.log(`Listening on port ${port}!`));
 
-module.exports = app;
+app.listen(port, () => console.log(`Listening on port ${port}!`));
+// process.exit();
+}
+
+// module.exports = app;

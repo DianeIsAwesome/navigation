@@ -13,7 +13,7 @@ const pool = new pg.Pool(config);
 
 const getSearchResults = function (searchTerm, cb) {
     pool.connect((err, client) => {
-      const query = "SELECT * FROM searchlisting WHERE city like '%" + searchTerm + "%' limit 20;";
+      const query = "SELECT * FROM searchlisting WHERE listingId = 1000000;";
         client.query(query, (err, result) => {
           if (err) {
             console.log(err, result)
