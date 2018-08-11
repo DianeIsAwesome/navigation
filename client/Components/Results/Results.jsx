@@ -30,6 +30,7 @@ export default class Results extends React.Component {
     } = props;
     axios.get(`${getResultsEndpoint}/${params.searchQuery}`).then((response) => {
       this.setState({ searchResults: response.data });
+      console.log(response.data)
     });
   }
 
@@ -69,7 +70,7 @@ Results.propTypes = {
 const Result = (props) => {
   const { history, searchResult } = props;
   const {
-    listingId, title, host, city, photo,
+    listingId, title, host, city, photourl,
   } = searchResult;
   const goToListing = () => {
     history.push(`${listingUrl}/${listingId}`);
@@ -82,7 +83,7 @@ const Result = (props) => {
         onKeyUp={e => handleKeyUp(e, goToListing)}
         role="link"
         tabIndex="0"
-        src={photo}
+        src={photourl}
         alt={title}
       />
       <div className={styles.details}>
