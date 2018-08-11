@@ -28,6 +28,7 @@ dist/
 
 # Credentials
 .aws.json
+newrelic.js
 
 # ignore data
 listingsIdAndName*

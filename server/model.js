@@ -18,7 +18,6 @@ const getSearchResults = function (searchTerm, cb) {
           if (err) {
             console.log(err, result)
           } else {
-            console.log(new Date())
             cb(null, result.rows)
           }
         });
@@ -35,7 +34,7 @@ const getSearchRecords = function (cb) {
         if (err) {
           console.log(query, err)
         } else {
-          console.log(result.rows)
+          console.log(result.rows[0])
           cb(null, result.rows)
         }
       });
@@ -50,7 +49,6 @@ const postSearchRecord = function (searchQuery, cb) {
           console.log(query, err)
           cb(err);
         } else {
-          // console.log(result.rows)
           cb(null, result.rows)
         }
       });
