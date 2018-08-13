@@ -9,7 +9,7 @@ const model = require('./model');
 const numCPUs = require('os').cpus().length;
 const redis = require("redis");
 const http = require('http');
-http.globalAgent.maxSockets = 1000;
+http.globalAgent.maxSockets = Infinity;
 
 
 

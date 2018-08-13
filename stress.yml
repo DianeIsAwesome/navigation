@@ -2,7 +2,7 @@ config:
   target: 'http://127.0.0.1:2999'
   phases:
     - duration: 20
-      arrivalRate: 10
+      arrivalRate: 100
   defaults:
     headers:
       x-my-service-auth: '987401838271002188298567'
@@ -11,5 +11,5 @@ scenarios:
     - loop:
       - get:
           url: "/search/{{$randomNumber(1,10000)}}"
-          count: 5000
+          count: 500
 
