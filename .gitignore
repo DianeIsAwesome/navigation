@@ -29,6 +29,7 @@ dist/
 # Credentials
 .aws.json
 newrelic.js
+dump.rdb
 
 # ignore data
 listingsIdAndName*

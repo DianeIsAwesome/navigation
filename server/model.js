@@ -1,19 +1,18 @@
-
 require('dotenv').config()
 const pg = require('pg');
 const format = require('pg-format');
 
-
 const config = {
   user: process.env.DB_USER,
   database: process.env.DB_DATABASE,
+  max_connections: 250
 }
 
 const pool = new pg.Pool(config);
 
 const getSearchResults = function (searchTerm, cb) {
     pool.connect((err, client) => {
-      const query = "SELECT * FROM searchlisting WHERE city like '%" + searchTerm + "%' limit 20;";
+      const query = "SELECT * FROM searchlisting WHERE listingId = " + searchTerm + ";";
         client.query(query, (err, result) => {
           if (err) {
             console.log(err, result)
@@ -23,7 +22,7 @@ const getSearchResults = function (searchTerm, cb) {
         });
     });
 };
-
+// "SELECT * FROM searchlisting WHERE listingId = 1000000;"
 // "SELECT * FROM searchlisting WHERE city::text like '%san%' limit 10;"
 // "SELECT * FROM searchlisting WHERE city like '%" + searchTerm + "%' limit 1000;";
 
