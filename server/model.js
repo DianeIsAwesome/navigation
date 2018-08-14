@@ -9,18 +9,24 @@ const config = {
 }
 
 const pool = new pg.Pool(config);
+var client;
+pool.connect((err, client2) => {
+  if (err) console.log(err, client2);
+  client = client2
+});
 
 const getSearchResults = function (searchTerm, cb) {
-    pool.connect((err, client) => {
+
       const query = "SELECT * FROM searchlisting WHERE listingId = " + searchTerm + ";";
-        client.query(query, (err, result) => {
+      client.query(query, (err, result) => {
+        console.log(query)
           if (err) {
             console.log(err, result)
           } else {
             cb(null, result.rows)
           }
         });
-    });
+
 };
 // "SELECT * FROM searchlisting WHERE listingId = 1000000;"
 // "SELECT * FROM searchlisting WHERE city::text like '%san%' limit 10;"
