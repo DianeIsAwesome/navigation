@@ -27,12 +27,14 @@
     "build:prod": "webpack --mode production && grunt s3",
     "build:docker": "docker build . -t bcronin2/fec-airbnh-navigation && docker push bcronin2/fec-airbnh-navigation",
     "build:all": "npm run build:prod && npm run build:docker",
-    "start": "nodemon server/index.js"
+    "start": "nodemon server/index.js",
+    "siege": "node --max-old-space-size=4096 siege.js"
   },
   "dependencies": {
     "@newrelic/native-metrics": "^3.1.0",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
+    "cassandra-driver": "^3.5.0",
     "cluster": "^0.7.7",
     "compression": "^1.7.3",
     "cors": "^2.8.4",
@@ -50,7 +52,8 @@
     "react-dom": "^16.4.2",
     "react-icons": "^2.2.7",
     "react-router-dom": "^4.3.1",
-    "redis": "^2.8.0"
+    "redis": "^2.8.0",
+    "siege": "^0.2.0"
   },
   "devDependencies": {
     "babel": "^6.23.0",
