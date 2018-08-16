@@ -8,14 +8,12 @@ const path = require('path');
 const model = require('./model');
 const numCPUs = require('os').cpus().length;
 const redis = require("redis");
-const http = require('http');
-http.globalAgent.maxSockets = Infinity;
+const compression = require('compression');  
 
 
 
 const masterProcess = () => {
   console.log(`Master ${process.pid} is running`);
-
   for (let i = 0; i < numCPUs; i++) {
     console.log(`Forking process number ${i}...`);
     cluster.fork();
@@ -23,21 +21,17 @@ const masterProcess = () => {
   cluster.on('online', function(worker) {
     console.log('Worker ' + worker.process.pid + ' is online');
   });
-
   cluster.on('exit', function(worker, code, signal) {
       console.log('Worker ' + worker.process.pid + ' died with code: ' + code + ', and signal: ' + signal);
       console.log('Starting a new worker');
       cluster.fork();
   });
-
-  // process.exit();
 }
 
 const childProcess = () => {
   console.log(`Worker ${process.pid} started`);
 
   const port = process.env.PORT || 2999;
-  const compression = require('compression');  
   
   const app = express();
   
@@ -57,21 +51,19 @@ const childProcess = () => {
 
   
   const redisAddress = process.env.REDIS;
-  
   const client = redis.createClient(redisAddress);
 
   app.get('/api/searchListings/:searchQuery', (req, res) => {
     const { searchQuery } = req.params;
-    client.get('api/searchListings/' + searchQuery, (err, results) => {
+    client.get(searchQuery, (err, results) => {
       if (results) {
-        console.log("Cache hit for " + searchQuery, results);
+        // console.log("Cache hit for " + searchQuery, results);
         res.send(results);
       } else {
         model.getSearchResults(searchQuery, (err, results) => {
           if (err) console.log(err);
           res.statusCode = err ? 400 : 200;
-          console.log(results)
-          if (results) client.setex('api/searchListings/' + searchQuery, 300, JSON.stringify(results));
+          if (results) client.setex(searchQuery, 300, JSON.stringify(results));
           res.send(err || results);
         });
       }
@@ -107,7 +99,6 @@ const childProcess = () => {
   //   return;
   // });
 
-
   app.post('/api/searchRecords', (req, res) => {
     const { searchQuery } = req.body;
     res.header('Access-Control-Allow-Origin', '*');
@@ -142,9 +133,7 @@ const childProcess = () => {
   //   res.sendFile(path.resolve(`${__dirname}/../public/index.html`));
   // });
 
-
   app.listen(port, () => console.log(`Listening on port ${port}!`));
-  // process.exit();
 }
 
 if (cluster.isMaster) {

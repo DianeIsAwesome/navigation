@@ -1,8 +1,16 @@
 config:
   target: 'http://127.0.0.1:2999'
+  # http:
+  #   pool: 2
   phases:
-    - duration: 100
-      arrivalRate: 200
+    - duration: 5
+      arrivalRate: 1
+      rampTo: 100
+    - duration: 240
+      arrivalRate: 150
+    - duration: 30
+      arrivalRate: 1000
+      rampTo: 5
   defaults:
     headers:
       x-my-service-auth: '987401838271002188298567'
@@ -10,6 +18,6 @@ scenarios:
   - flow:
     - loop:
       - get:
-          url: "/api/searchListings/{{ $randomNumber(1,1000000) }}"
-          count: 5
+          url: "/api/searchListings/{{ $randomNumber(1,10000000) }}"
+          count: 100
 
