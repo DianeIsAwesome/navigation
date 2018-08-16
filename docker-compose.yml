@@ -1,15 +1,15 @@
 version: '3'
 
 services:
-  navigation:
-    image: bcronin2/fec-airbnh-navigation
-    command: bash -c "npm run seed && npm run start"
-    depends_on:
-      - "database"
-    ports:
-      - "80:2999"
+  # navigation:
+  #   image: chrisw321/db
+  #   command: bash -c "npm run seed && npm run start"
+  #   depends_on:
+  #     - "database"
+  #   ports:
+  #     - "80:2999"
   database:
     container_name: database
-    image: mongo:latest
+    build: ./database
     ports:
-      - "27017:27017"
+      - "5432:5432"

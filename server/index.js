@@ -9,8 +9,6 @@ const model = require('./model');
 const numCPUs = require('os').cpus().length;
 const redis = require("redis");
 const compression = require('compression');  
-const http = require('http');
-http.globalAgent.maxSockets = Infinity;
 
 
 
@@ -57,7 +55,7 @@ const childProcess = () => {
 
   app.get('/api/searchListings/:searchQuery', (req, res) => {
     const { searchQuery } = req.params;
-    client.get('api/searchListings/' + searchQuery, (err, results) => {
+    client.get(searchQuery, (err, results) => {
       if (results) {
         // console.log("Cache hit for " + searchQuery, results);
         res.send(results);
@@ -65,7 +63,7 @@ const childProcess = () => {
         model.getSearchResults(searchQuery, (err, results) => {
           if (err) console.log(err);
           res.statusCode = err ? 400 : 200;
-          if (results) client.setex('api/searchListings/' + searchQuery, 300, JSON.stringify(results));
+          if (results) client.setex(searchQuery, 300, JSON.stringify(results));
           res.send(err || results);
         });
       }
