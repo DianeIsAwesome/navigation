@@ -52,17 +52,17 @@ const getSearchResults = function (searchTerm, cb) {
 //       });
 // };
 
-// const postSearchRecord = function (searchQuery, cb) {
-//     const query = "INSERT INTO searchlisting (title, host, city, photoURL) VALUES ('test', 'test1', 'test2', 'test3');"
-//       pool.query(query, (err, result) => {
-//         if (err) {
-//           console.log(query, err)
-//           cb(err);
-//         } else {
-//           cb(null, result.rows)
-//         }
-//       });
-// };
+const postSearchRecord = function (searchQuery, cb) {
+    const query = "INSERT INTO searchlisting (title, host, city, photoURL) VALUES ('test', 'test1', 'test2', 'test3');"
+      pool.query(query, (err, result) => {
+        if (err) {
+          console.log(query, err)
+          cb(err);
+        } else {
+          cb(null, result.rows)
+        }
+      });
+};
 
 // const updateSearchListing = (id, data, cb) => {
 //     const query = "UPDATE searchlisting SET title = 'newtitle', host = 'chris', city = 'san francisco', photoURL = 'nah' WHERE listingId = 2;"
@@ -92,7 +92,7 @@ const getSearchResults = function (searchTerm, cb) {
 module.exports = {
   getSearchResults,
   // getSearchRecords,
-  // postSearchRecord,
+  postSearchRecord,
   // updateSearchListing,
   // deleteSearchListing,
 };
