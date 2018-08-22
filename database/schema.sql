@@ -24,5 +24,6 @@ CREATE TABLE searchRecord (
 
 -- \COPY searchRecord FROM './recordsData0-10.csv' WITH (FORMAT csv);
 
+-- CREATE INDEX listingIndex on searchListing (listingId);
 
 -- psql < ./data/schema.sql

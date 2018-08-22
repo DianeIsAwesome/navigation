@@ -30,7 +30,7 @@ dist/
 .aws.json
 newrelic.js
 dump.rdb
-
+credentials.json
 # ignore data
 listingsIdAndName*
 listingData*
