@@ -23,7 +23,7 @@ const LOADER_OBJECT = [
 module.exports = {
   entry: ENTRY_POINT,
   output: {
-    filename: 'bundle.js',
+    filename: 'bundle-server.js',
     path: OUTPUT_PATH,
   },
   devtool: 'source-map',

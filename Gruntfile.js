@@ -5,13 +5,15 @@ module.exports = function (grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    aws: grunt.file.readJSON('credentials.json'),
+    // aws: grunt.file.readJSON('credentials.json'),
     s3: {
       options: {
-
+        accessKeyId: 'AKIAJ43PIWB6YMBTQOJQ',
+        secretAccessKey: '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',
+        bucket: 'sdc-images-vacationdb',
       },
       build: {
-        cwd: 'public',
+        cwd: 'public/dist',
         src: '**',
       },
     },
