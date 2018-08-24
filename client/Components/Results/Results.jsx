@@ -16,13 +16,13 @@ export default class Results extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.getSearchResults(this.props);
-  }
+  // componentDidMount() {
+  //   this.getSearchResults(this.props);
+  // }
 
-  componentWillReceiveProps(nextProps) {
-    this.getSearchResults(nextProps);
-  }
+  // componentWillReceiveProps(nextProps) {
+  //   this.getSearchResults(nextProps);
+  // }
 
   getSearchResults(props) {
     const {

@@ -8,12 +8,10 @@ module.exports = function (grunt) {
     // aws: grunt.file.readJSON('credentials.json'),
     s3: {
       options: {
-        accessKeyId: 'AKIAJ43PIWB6YMBTQOJQ',
-        secretAccessKey: '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',
-        bucket: 'sdc-images-vacationdb',
+
       },
       build: {
-        cwd: 'public/dist',
+        cwd: 'public/dist2',
         src: '**',
       },
     },

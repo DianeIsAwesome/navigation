@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import FaSearch from 'react-icons/lib/fa/search';
 import PropTypes from 'prop-types';
-import History from '../History/History';
+import History from '../History/History.jsx';
 import { constants } from '../../utils';
 
 import styles from './Input.css';
@@ -26,15 +26,15 @@ export default class Input extends React.Component {
     };
   }
 
-  componentDidMount() {
-    this.getSearchRecords();
-  }
+  // componentDidMount() {
+  //   this.getSearchRecords();
+  // }
 
-  getSearchRecords() {
-    axios.get(getRecordsEndpoint).then((response) => {
-      this.setState({ searchRecords: response.data });
-    });
-  }
+  // getSearchRecords() {
+  //   axios.get(getRecordsEndpoint).then((response) => {
+  //     this.setState({ searchRecords: response.data });
+  //   });
+  // }
 
   setSearchQuery(searchQuery) {
     this.setState({ searchQuery }, this.executeSearch);
