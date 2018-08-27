@@ -25,7 +25,7 @@ coverage
 # Compiled Dirs (http://nodejs.org/api/addons.html)
 build/
 dist/
-
+Gruntfile.js
 # Credentials
 .aws.json
 newrelic.js
