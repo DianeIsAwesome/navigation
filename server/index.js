@@ -53,7 +53,7 @@ const childProcess = () => {
         model.getSearchResults(searchQuery, (err, results) => {
           if (err) console.log(err);
           res.statusCode = err ? 400 : 200;
-          if (results) client.setex(searchQuery, 300, JSON.stringify(results));
+          if (results) client.setex(searchQuery, 1500, JSON.stringify(results));
           res.send(err || results);
         });
       }

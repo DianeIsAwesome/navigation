@@ -5,13 +5,13 @@ module.exports = function (grunt) {
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    aws: grunt.file.readJSON('credentials.json'),
+    // aws: grunt.file.readJSON('credentials.json'),
     s3: {
       options: {
 
       },
       build: {
-        cwd: 'public',
+        cwd: 'public/dist2',
         src: '**',
       },
     },

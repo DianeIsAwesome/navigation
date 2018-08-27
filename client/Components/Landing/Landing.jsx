@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Input from '../Input/Input';
+import Input from '../Input/Input.jsx';
 
 import styles from './Landing.css';
 
